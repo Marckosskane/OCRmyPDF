@@ -140,3 +140,26 @@ def test_nested_plugin_option_access():
 
     # Test that cached instances are returned
     assert options.tesseract is tesseract
+
+
+def test_default_tesseract_timeout():
+    """Test that OcrOptions without explicit tesseract_timeout uses plugin default.
+
+    Regression test for GitHub issue #1636: when using the Python API without
+    specifying tesseract_timeout, the default was 0.0 which caused Tesseract
+    to immediately time out and produce no OCR output.
+    """
+    from ocrmypdf._options import OcrOptions
+    from ocrmypdf.api import setup_plugin_infrastructure
+
+    setup_plugin_infrastructure()
+
+    # Default OcrOptions should leave tesseract_timeout as None
+    options = OcrOptions(
+        input_file='test.pdf',
+        output_file='output.pdf',
+    )
+    assert options.tesseract_timeout is None
+
+    # The plugin default (180s) should be used when tesseract_timeout is None
+    assert options.tesseract.timeout == 180.0
