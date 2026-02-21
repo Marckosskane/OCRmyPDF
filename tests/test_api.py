@@ -22,6 +22,64 @@ def test_language_list():
         ocrmypdf.ocr('doesnotexist.pdf', '_.pdf', language=['eng', 'deu'])
 
 
+def test_language_parameter_mapped_to_languages():
+    """Test that the API 'language' parameter is mapped to OcrOptions 'languages'.
+
+    Regression test for GitHub issue #1640: the Python API ignored the language
+    parameter, always defaulting to 'eng'.
+    """
+    from ocrmypdf._options import OcrOptions
+    from ocrmypdf.api import create_options, setup_plugin_infrastructure
+    from ocrmypdf.cli import get_parser
+
+    setup_plugin_infrastructure()
+    parser = get_parser()
+
+    options = create_options(
+        input_file='test.pdf',
+        output_file='output.pdf',
+        parser=parser,
+        language=['tam'],
+    )
+    assert options.languages == ['tam']
+
+    # Test with a list of multiple languages
+    options = create_options(
+        input_file='test.pdf',
+        output_file='output.pdf',
+        parser=parser,
+        language=['fra', 'deu'],
+    )
+    assert options.languages == ['fra', 'deu']
+
+    # Test with a bare string (single language)
+    options = create_options(
+        input_file='test.pdf',
+        output_file='output.pdf',
+        parser=parser,
+        language='tam',
+    )
+    assert options.languages == ['tam']
+
+    # Test '+'-separated string is split like CLI --language
+    options = create_options(
+        input_file='test.pdf',
+        output_file='output.pdf',
+        parser=parser,
+        language='eng+spa',
+    )
+    assert options.languages == ['eng', 'spa']
+
+    # Test '+'-separated entry within a list is also split
+    options = create_options(
+        input_file='test.pdf',
+        output_file='output.pdf',
+        parser=parser,
+        language=['eng+spa'],
+    )
+    assert options.languages == ['eng', 'spa']
+
+
 def test_stream_api(resources: Path):
     in_ = (resources / 'graph.pdf').open('rb')
     out = BytesIO()
