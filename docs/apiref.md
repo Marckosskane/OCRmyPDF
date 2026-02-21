@@ -33,9 +33,6 @@ should be mainly of interest to plugin developers.
 ```{eval-rst}
 .. automodule:: ocrmypdf.helpers
     :members:
-    :noindex: deprecated
-
-    .. autodecorator:: deprecated
 ```
 
 ## ocrmypdf.hocrtransform

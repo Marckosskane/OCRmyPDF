@@ -49,3 +49,4 @@ src/ocrmypdf/_version.py
 .idea/
 .aider*
 CLAUDE.md
+.claude/

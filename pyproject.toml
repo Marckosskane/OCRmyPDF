@@ -49,7 +49,7 @@ keywords = ["PDF", "OCR", "optical character recognition", "PDF/A", "scanning"]
 Documentation = "https://ocrmypdf.readthedocs.io/"
 Source = "https://github.com/ocrmypdf/OCRmyPDF"
 Tracker = "https://github.com/ocrmypdf/OCRmyPDF/issues"
-Changelog = "https://github.com/ocrmypdf/OCRmyPDF/docs/release_notes.md"
+Changelog = "https://github.com/ocrmypdf/OCRmyPDF/tree/main/docs/releasenotes"
 
 [project.optional-dependencies]
 # User-installable features - use `uv sync --extra <name>` or `pip install ocrmypdf[name]`
@@ -183,6 +183,7 @@ docs = [
   "myst-parser>=4.0.1",
   "sphinx",
   "sphinx-issues",
+  "sphinx-reredirects",
   "sphinx-rtd-theme",
   "sphinxcontrib-mermaid",
 ]

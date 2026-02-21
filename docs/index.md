@@ -17,7 +17,7 @@ image processing and OCR (recognized, searchable text) to existing PDFs.
 :maxdepth: 1
 
 introduction
-release_notes
+releasenotes/index
 installation
 languages
 jbig2
