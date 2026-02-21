@@ -393,5 +393,5 @@ def bump_version() -> None:
 
 
 if __name__ == "__main__":
-    os.chdir(Path(__file__).parent.resolve())
+    os.chdir(Path(__file__).parent.parent.resolve())
     cyclopts.run(bump_version)
