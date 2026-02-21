@@ -1,12 +1,12 @@
 # SPDX-FileCopyrightText: 2022 James R. Barlow
 # SPDX-License-Identifier: MPL-2.0
 [build-system]
-requires = ["hatchling", "hatch-vcs"]
+requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [project]
 name = "ocrmypdf"
-dynamic = ["version"]
+version = "17.2.0"
 description = "OCRmyPDF adds an OCR text layer to scanned PDF files, allowing them to be searched"
 readme = "README.md"
 license = "MPL-2.0"
@@ -58,12 +58,6 @@ webservice = ["streamlit>=1.41.0"]
 
 [project.scripts]
 ocrmypdf = "ocrmypdf.__main__:run"
-
-[tool.hatch.version]
-source = "vcs"
-
-[tool.hatch.build.hooks.vcs]
-version-file = "src/ocrmypdf/_version.py"
 
 [tool.distutils.bdist_wheel]
 python-tag = "py311"
