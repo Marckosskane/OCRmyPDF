@@ -3,6 +3,24 @@
 
 # v17
 
+## v17.3.0
+
+- Fixed Python API ignoring the ``language`` parameter, always defaulting to
+  ``eng``. The API now correctly maps ``language`` to OcrOptions ``languages``
+  and splits ``+``-separated codes (e.g. ``eng+deu``) to match CLI behavior.
+  {issue}`1640`
+- Fixed Python API producing empty OCR output because ``tesseract_timeout``
+  defaulted to 0, causing Tesseract to time out immediately. The default is
+  now ``None``, falling back to the plugin's 180-second timeout. {issue}`1636`
+- Fixed OCR text layer displacement on PDFs with non-zero MediaBox origins
+  (e.g. JSTOR or cropped PDFs). The coordinate transformation matrix is now
+  always computed, not skipped when rotation is zero. {issue}`1630`
+- Restored image overlay support (``--image``) for the hocrtransform tool,
+  enabling sandwich PDF output with the fpdf2 renderer. {issue}`1634`
+- Docker: updated Alpine base image to 3.23.
+- Documentation restructured into per-major-version release notes files.
+- Release process improvements.
+
 ## v17.2.0
 
 - Fixed incorrect word spacing in poppler-based PDF viewers and tools (Evince,
